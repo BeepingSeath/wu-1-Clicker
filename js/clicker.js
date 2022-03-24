@@ -107,12 +107,12 @@ window.addEventListener('load', (event) => {
  */
 upgrades = [
     {
-        name: 'Fin sop',
+        name: 'En Pistol',
         cost: 10,
         amount: 1,
     },
     {
-        name: 'Spade',
+        name: '',
         cost: 100,
         amount: 10,
     },

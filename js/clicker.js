@@ -107,19 +107,39 @@ window.addEventListener('load', (event) => {
  */
 upgrades = [
     {
-        name: 'En Pistol',
+        name: 'A Gun',
         cost: 10,
         amount: 1,
     },
     {
-        name: '',
+        name: 'Titan Form',
         cost: 100,
         amount: 10,
     },
     {
-        name: 'Hjälpreda',
+        name: 'Pure Blood Demon',
         cost: 1000,
         amount: 100,
+    },
+    {
+        name: 'Death Notebook',
+        cost: 10000,
+        amount: 1000,
+    },
+    {
+        name: 'All For One',
+        cost: 100000,
+        amount: 10000,
+    },
+    {
+        name: 'Long Hair Gon',
+        cost: 10000000,
+        amount: 1000000,
+    },
+    {
+        name: 'One Punch',
+        cost: 100000000,
+        amount: 10000000,
     },
 ];
 
@@ -149,16 +169,17 @@ function createCard(upgrade) {
     const cost = document.createElement('p');
 
     header.textContent = `${upgrade.name}, +${upgrade.amount} per sekund.`;
-    cost.textContent = `Köp för ${upgrade.cost} benbitar.`;
-
+    cost.textContent = `Köp för ${upgrade.cost} Yen.`;
+    
     card.addEventListener('click', (e) => {
         if (money >= upgrade.cost) {
             moneyPerClick++;
             money -= upgrade.cost;
             upgrade.cost *= 1.5;
-            cost.textContent = 'Köp för ' + upgrade.cost + ' benbitar';
+            upgrade.cost = Math.round(upgrade.cost);
+            cost.textContent = 'Köp för ' + upgrade.cost + ' Yen';
             moneyPerSecond += upgrade.amount;
-            message('Grattis du har lockat till dig fler besökare!', 'success');
+            message('Your power level has gone up', 'success');
         } else {
             message('Du har inte råd.', 'warning');
         }

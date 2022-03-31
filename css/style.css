@@ -89,7 +89,7 @@ select {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #f8f8f8;
+    background-color: #ff5e00b7;
     color: #121212;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -150,6 +150,7 @@ footer {
     width: 100%;
     display: flex;
     justify-content: center;
+
 }
 .game {
     margin-top: 2rem;
@@ -168,9 +169,13 @@ footer {
 
 /* för spelelementet används #id som selektor för att skapa css reglerna */
 #click {
-    width: 8rem;
-    height: 8rem;
-    font-size: 2rem;
+    width: 7.5rem;
+    height: 7.5rem;
+    font-size: 1.5rem;
+    background-color: #ff59003d;
+    border: #121212;
+    border-style: solid;
+    justify-content: center;
 }
 
 /* #msgbox är elementet som visar sidans toasts, popupmeddelanden
@@ -193,16 +198,16 @@ footer {
  * meddelanden. Javascript används för att lägga till stilen på meddelandet
  */
 .warning {
-    background-color: palevioletred;
+    background-color: rgb(219, 74, 7);
 }
 
 .success {
-    background-color: mediumspringgreen;
+    background-color: rgb(48, 187, 20);
 }
 
 .achievement {
     color: #121212;
-    background-color: rebeccapurple;
+    background-color: rgb(113, 23, 202);
 }
 
 /* dessa kort används för spelets uppgraderingar 
@@ -213,17 +218,21 @@ footer {
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    border: 1px solid #646464;
+    border: 3px solid #000000;
     margin: 0.5rem 0;
     padding: 1rem 0.5rem;
+    background-color: #ff59003d;
 }
 
 .card:hover {
-    background-color: #dfdfdf;
+    background-color: #ff5e00a1;
 }
 /* klassen används på kortets titel, font-weight: 600 gör fonten fetare, en normal
  * font vikt är oftast 400
  */
 .title {
     font-weight: 600;
+}
+#click:hover {
+    background-color: #ff5e00a1;
 }

@@ -25,8 +25,11 @@ let money = 0;
 let moneyPerClick = 1;
 let moneyPerSecond = 0;
 let last = 0;
+let playtime = 0;
+let multiplier = 1;
 
-let achievementTest = false;
+let achievementRank = 0;
+let achievementTime = 0;
 
 /* Med ett valt element, som knappen i detta fall så kan vi skapa listeners
  * med addEventListener så kan vi lyssna på ett specifikt event på ett html-element
@@ -65,15 +68,57 @@ function step(timestamp) {
     if (timestamp >= last + 1000) {
         money += moneyPerSecond;
         last = timestamp;
+        playtime += 1;
     }
 
     // exempel på hur vi kan använda värden för att skapa tex 
     // achievements. Titta dock på upgrades arrayen och gör något rimligare om du
     // vill ha achievements.
     // på samma sätt kan du även dölja uppgraderingar som inte kan köpas
-    if (moneyPerClick == 10 && !achievementTest) {
-        achievementTest = true;
-        message('Du har hittat en FOSSIL!', 'achievement');
+    if (moneyPerClick >= 10 && achievementRank == 0) {
+        achievementRank += 1;
+        multiplier *= 2;
+        message('You have become an E Rank Adventurer', 'achievement');
+    }
+    if (moneyPerClick >= 50 &&  achievementRank == 1) {
+        achievementRank += 1;
+        multiplier *= 2;
+        message('You have become an D Rank Adventurer', 'achievement');
+    }
+    if (moneyPerClick >= 150 &&  achievementRank == 2) {
+        achievementRank += 1;
+        multiplier *= 2;
+        message('You have become an C Rank Adventurer', 'achievement');
+    }
+    if (moneyPerClick >= 500 &&  achievementRank == 3) {         
+        achievementRank += 1;
+        multiplier *= 2;
+        message('You have become an B Rank Adventurer', 'achievement');
+    }
+    if (moneyPerClick >= 3500 &&  achievementRank == 4) {
+        achievementRank += 1;
+        multiplier *= 2;
+        message('You have become an A Rank Adventurer', 'achievement');
+    }
+    if (moneyPerClick >= 5000 &&  achievementRank == 5) {
+        achievementRank += 1;
+        multiplier *= 2;
+        message('You have become an S Rank Adventurer', 'achievement');
+    }
+    if (playtime == 60 && achievementTime == 0) {
+        multiplier *= 2;
+        achievementTime += 1;
+        message('Wow, hardworker here!', 'achievement');
+    }
+    if (playtime == 600 && achievementTime == 0) {
+        multiplier *= 2;
+        achievementTime += 1;
+        message('10 minutes O_O', 'achievement');
+    }
+    if (playtime == 1800 && achievementTime == 0) {
+        multiplier *= 2;
+        achievementTime += 1;
+        message('Half an hour! you are really invested in this', 'achievement');
     }
 
     window.requestAnimationFrame(step);
@@ -132,14 +177,29 @@ upgrades = [
         amount: 10000,
     },
     {
-        name: 'Long Hair Gon',
+        name: 'Very Long Hair',
         cost: 10000000,
         amount: 1000000,
     },
     {
-        name: 'One Punch',
+        name: 'Domain Expansion',
         cost: 100000000,
         amount: 10000000,
+    },
+    {
+        name: 'One Punch',
+        cost: 1000000000,
+        amount: 100000000,
+    },
+    {
+        name: 'Dragon Kagune',
+        cost: 10000000000,
+        amount: 1000000000,
+    },
+    {
+        name: 'Dual Wielding',
+        cost: 100000000000,
+        amount: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
     },
 ];
 
@@ -168,12 +228,12 @@ function createCard(upgrade) {
     header.classList.add('title');
     const cost = document.createElement('p');
 
-    header.textContent = `${upgrade.name}, +${upgrade.amount} per sekund.`;
-    cost.textContent = `Köp för ${upgrade.cost} Yen.`;
-    
+    header.textContent = `${upgrade.name}, +${upgrade.amount} per second.`;
+    cost.textContent = `Buy for ${upgrade.cost} Yen.`;
+
     card.addEventListener('click', (e) => {
         if (money >= upgrade.cost) {
-            moneyPerClick++;
+            moneyPerClick += 1*multiplier;
             money -= upgrade.cost;
             upgrade.cost *= 1.5;
             upgrade.cost = Math.round(upgrade.cost);
@@ -181,15 +241,15 @@ function createCard(upgrade) {
             moneyPerSecond += upgrade.amount;
             message('Your power level has gone up', 'success');
         } else {
-            message('Du har inte råd.', 'warning');
+            message('You don\'t have enough money', 'warning');
         }
     });
 
     card.appendChild(header);
     card.appendChild(cost);
     return card;
+    
 }
-
 /* Message visar hur vi kan skapa ett html element och ta bort det.
  * appendChild används för att lägga till och removeChild för att ta bort.
  * Detta görs med en timer.

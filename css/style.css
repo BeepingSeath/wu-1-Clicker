@@ -91,7 +91,8 @@ body {
     flex-direction: column;
     background-color: #ff5e00b7;
     color: #121212;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Rubik', sans-serif;
+    
 }
 /* För att göra footern sticky så har vi flex på bodyn och då räcker det med 
  * margin-top auto här.
@@ -169,8 +170,8 @@ footer {
 
 /* för spelelementet används #id som selektor för att skapa css reglerna */
 #click {
-    width: 7.5rem;
-    height: 7.5rem;
+    width: 8.5rem;
+    height: 8.5rem;
     font-size: 1.5rem;
     background-color: #ff59003d;
     border: #121212;
